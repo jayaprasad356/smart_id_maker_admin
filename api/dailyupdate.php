@@ -25,11 +25,6 @@ foreach ($users as $user) {
     $userId = $user['id'];     
     $planId = $user['plan_id'];      
 
-    // Check only for plan_id 5
-    if ($planId != 5) {
-        continue;
-    }
-
     $joinedDate = new DateTime($user['joined_date']);      
     $interval = $currentDate->diff($joinedDate);     
     $totalDays = $interval->days;      
@@ -42,7 +37,7 @@ foreach ($users as $user) {
 
     $workedDays = $totalDays - $leaveDays;      
 
-    $threshold = 2;      
+    $threshold = 30;      
 
     if ($workedDays >= $threshold) {         
         $updateSql = "UPDATE user_plan SET claim = 0 WHERE id = $userId";         

@@ -40,7 +40,7 @@ foreach ($users as $user) {
     $threshold = 30;      
 
     if ($workedDays >= $threshold) {         
-        $updateSql = "UPDATE user_plan SET claim = 0 WHERE id = $userId";         
+        $updateSql = "UPDATE user_plan SET claim = 0 , code_generate = 0 WHERE id = $userId";         
         $db->sql($updateSql);     
     } 
 }  

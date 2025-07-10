@@ -25,6 +25,7 @@ if (isset($_POST['btnEdit'])) {
     $referred_by = $db->escapeString($_POST['referred_by']); // ✅ NEW
     $balance = $db->escapeString($_POST['balance']);
     $earn = $db->escapeString($_POST['earn']);
+    $total_codes = $db->escapeString($_POST['total_codes']);
     $plan_type = isset($_POST['plan_type']) ? $db->escapeString($_POST['plan_type']) : 'trial';
     $code_generate = isset($_POST['code_generate']) ? $db->escapeString($_POST['code_generate']) : 0;
     $joined_date = $db->escapeString($_POST['joined_date']);
@@ -44,7 +45,8 @@ if (isset($_POST['btnEdit'])) {
             status='$status', 
             plan_type='$plan_type', 
             code_generate='$code_generate',
-            joined_date='$joined_date'  
+            joined_date='$joined_date',
+            total_codes='$total_codes'
             WHERE id=$ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
@@ -206,6 +208,11 @@ $res = $db->getResult();
                             </select>
                         </div>
 
+                        <div class="form-group col-md-6">
+                            <label>Total Codes</label>
+                            <input type="number" class="form-control" name="total_codes" value="<?php echo $res[0]['total_codes']; ?>">
+                        </div>
+                        
                         <div class="form-group col-md-6">
                             <label>Joined Date</label>
                             <input type="date" class="form-control" name="joined_date" value="<?php echo date('Y-m-d', strtotime($res[0]['joined_date'])); ?>">
